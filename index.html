@@ -431,6 +431,8 @@
     .stat b small { font-size: 0.55em; color: var(--faint); }
 
     /* ---------- the CradleLoop demo ---------- */
+    .try-lede { margin: 2rem 0 1rem; color: var(--soft); }
+    .try-lede strong { color: var(--ink); font-weight: 500; }
     .demo {
       border: 1px solid var(--rule);
       border-radius: 12px;
@@ -679,6 +681,127 @@
       .kicker { width: 58px; right: 1rem; bottom: 1rem; }
       .ticks a { font-size: 0.56rem; }
     }
+
+    /* ---------- v3 front page: a night-sky banner + a grid of section tiles ---------- */
+    .wide { max-width: calc(1000px + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
+    .band {
+      --band-ink: #ecebf3; --band-soft: rgba(236, 235, 243, 0.72); --band-accent: #c3c8f5; --band-rule: rgba(236, 235, 243, 0.14);
+      position: relative; overflow: hidden;
+      margin-top: 22px; padding: 30px 48px 0; border-radius: 22px;
+      background: radial-gradient(120% 90% at 85% 0%, #3a4080 0%, transparent 60%), linear-gradient(160deg, #1b1e3a 0%, #262a55 100%);
+      color: var(--band-ink);
+    }
+    :root[data-theme="dark"] .band { background: radial-gradient(120% 90% at 85% 0%, #2d3266 0%, transparent 60%), linear-gradient(160deg, #181a2b 0%, #1f2240 100%); box-shadow: inset 0 0 0 1px #2a2d45; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .band { background: radial-gradient(120% 90% at 85% 0%, #2d3266 0%, transparent 60%), linear-gradient(160deg, #181a2b 0%, #1f2240 100%); box-shadow: inset 0 0 0 1px #2a2d45; }
+    }
+    /* a few stars */
+    .band::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.7;
+      background-image:
+        radial-gradient(1.2px 1.2px at 8% 18%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 22% 72%, #fff 50%, transparent 51%),
+        radial-gradient(1.4px 1.4px at 38% 12%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 52% 40%, #fff 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 63% 8%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 70% 62%, #fff 50%, transparent 51%),
+        radial-gradient(1.3px 1.3px at 92% 30%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 31% 46%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 46% 82%, #fff 50%, transparent 51%), radial-gradient(1.2px 1.2px at 13% 55%, #fff 50%, transparent 51%);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle { from { opacity: 0.35; } to { opacity: 0.8; } }
+    .band > * { position: relative; }
+    .band .eyebrow { margin-bottom: 1.6rem; }
+    .band .label { color: var(--band-soft); }
+    .band .label .time { color: var(--band-accent); }
+    .band .late { margin: -0.8rem 0 1.4rem; color: var(--band-accent); }
+    .band-grid { display: grid; grid-template-columns: 1fr 230px; gap: 44px; align-items: center; }
+    .band h1 { color: #fff; font-size: 3.4rem; }
+    .band .tagline { color: var(--band-soft); }
+    .band .mission { margin: 1.4rem 0 1.8rem; font-size: 1.9rem; }
+    .band .mission em { color: var(--band-accent); }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; border-radius: 999px; border: 1px solid var(--band-accent);
+      font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.04em; text-transform: uppercase;
+      background: var(--band-accent); color: #1b1e3a;
+      transition: transform 0.15s, background-color 0.2s, color 0.2s;
+    }
+    .btn:hover, .btn:focus-visible { color: #1b1e3a; border-color: #fff; background: #fff; transform: translateY(-1px); }
+    .btn.ghost { background: none; color: var(--band-ink); border-color: var(--band-rule); }
+    .btn.ghost:hover, .btn.ghost:focus-visible { color: #fff; border-color: #fff; background: none; }
+    .photo img {
+      display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%;
+      border-radius: 16px; box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.12);
+    }
+    .band .facts { margin: 34px -48px 0; padding: 0 48px; border-color: var(--band-rule); border-bottom: 0; background: rgba(0, 0, 0, 0.14); }
+    .band .fact { color: var(--band-ink); }
+    .band .fact + .fact { border-left-color: var(--band-rule); }
+    .band .fact span { color: var(--band-soft); }
+    .band .fact:hover b { color: var(--band-accent); }
+
+    .explore { padding-top: 64px; }
+    .explore-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; }
+    .explore-head h2 { font-size: 2.1rem; font-weight: 500; letter-spacing: -0.015em; line-height: 1.1; }
+    .explore-head p { margin-top: 0.5rem; color: var(--soft); }
+    .explore .sleeper { width: 170px; flex: none; }
+    .tiles { list-style: none; padding: 0; margin: 28px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .tile {
+      display: flex; flex-direction: column; height: 100%;
+      border: 1px solid var(--rule); border-radius: 16px; overflow: hidden;
+      background: var(--bg);
+      transition: transform 0.25s cubic-bezier(.2, .7, .2, 1), box-shadow 0.25s, border-color 0.25s;
+    }
+    .tile:hover, .tile:focus-visible { color: var(--ink); border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 18px 36px -22px rgba(27, 30, 58, 0.55); }
+    .tile .art { position: relative; aspect-ratio: 16 / 10; overflow: hidden; display: grid; place-items: center; background: var(--chip); }
+    .tile .art img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(.2, .7, .2, 1); }
+    .tile:hover .art img { transform: scale(1.05); }
+    .tile .art svg { width: 34%; height: auto; overflow: visible; transition: transform 0.4s cubic-bezier(.3, 1.6, .5, 1); }
+    .tile:hover .art svg { transform: translateY(-4px) rotate(-3deg); }
+    .tile .art .s { fill: none; stroke: var(--chip-ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .tile .art .t { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .tile .art .f { fill: var(--accent); }
+    .tile .badge {
+      position: absolute; top: 10px; left: 10px; padding: 4px 9px; border-radius: 999px;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase;
+      background: var(--bg); color: var(--accent); box-shadow: 0 2px 8px -4px rgba(0, 0, 0, 0.3);
+    }
+    .tile .txt { flex: 1; display: flex; flex-direction: column; padding: 14px 16px 16px; }
+    .tile .when { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--accent); }
+    .tile h3 { margin: 4px 0 6px; font-size: 1.25rem; font-weight: 500; line-height: 1.2; }
+    .tile p { margin: 0; font-family: var(--mono); font-size: 0.66rem; line-height: 1.55; color: var(--soft); }
+    .tile .go { margin-top: auto; padding-top: 12px; font-family: var(--mono); font-size: 0.66rem; color: var(--faint); transition: color 0.2s, transform 0.2s; }
+    .tile:hover .go { color: var(--accent); transform: translateX(4px); }
+    .tiles li:nth-child(4n+2) .tile.reveal { transition-delay: 0.06s; }
+    .tiles li:nth-child(4n+3) .tile.reveal { transition-delay: 0.12s; }
+    .tiles li:nth-child(4n) .tile.reveal { transition-delay: 0.18s; }
+    .group { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; margin: 34px 0 -10px; font-family: var(--mono); font-size: 0.72rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+    .group .dl { text-transform: none; letter-spacing: 0.02em; color: var(--soft); }
+    .cv-part { padding-top: 1.6rem; }
+    .cv-part + .cv-part { margin-top: 0.6rem; }
+    .cv-h { margin-bottom: 0.8rem; font-size: 1.3rem; font-weight: 500; }
+    .js .tile.reveal.in:hover { transform: translateY(-4px); }
+
+    @media (max-width: 820px) {
+      .band { padding: 24px 22px 0; }
+      .band-grid { grid-template-columns: 1fr; gap: 20px; }
+      .photo { order: -1; }
+      .photo img { width: 120px; aspect-ratio: 1; border-radius: 50%; object-position: 50% 25%; }
+      .band h1 { font-size: 2.5rem; }
+      .band .mission { font-size: 1.5rem; margin: 1rem 0 1.4rem; }
+      .band .facts { margin: 28px -22px 0; padding: 0 22px; }
+      .tiles { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .tiles li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+      .tiles li:last-child:nth-child(odd) .art { aspect-ratio: 16 / 7; }
+      .explore-head h2 { font-size: 1.7rem; }
+      .explore .sleeper { width: 120px; }
+    }
+    @media (max-width: 480px) {
+      .tile .txt { padding: 12px 12px 14px; }
+      .tile h3 { font-size: 1.08rem; }
+      .tile p { font-size: 0.62rem; }
+    }
+    .tile .art .tilt { transform-box: view-box; transform-origin: 30px 38px; animation: rockmini 3.2s ease-in-out infinite; }
+    @keyframes rockmini { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+    @media (prefers-reduced-motion: reduce) { .band::before, .tile .art .tilt { animation: none; } }
   </style>
 </head>
 <body>
@@ -702,10 +825,9 @@
     </div>
   </header>
 
-  <main class="wrap">
-
-    <!-- ===================== INTRO ===================== -->
-    <section class="intro" id="intro" data-min="0">
+  <!-- ===================== FRONT PAGE ===================== -->
+  <section class="intro wide" id="intro" data-min="0">
+    <div class="band">
       <div class="eyebrow">
         <span class="label"><span class="time">22:00</span>Lights out</span>
         <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dark mode">
@@ -714,15 +836,33 @@
           <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" /></svg>
         </button>
       </div>
-
       <p class="late" hidden>it's late. Shivank would want you asleep.</p>
-
-      <div class="masthead">
+      <div class="band-grid">
         <div>
           <h1>Shivank Bhatia</h1>
-          <p class="tagline">Aspiring engineer</p>
+          <p class="tagline">Aspiring engineer · Mumbai</p>
+          <p class="mission"><em>I love sleep.</em></p>
+          <div class="cta">
+            <a class="btn" href="#resume">View resume ↓</a>
+            <a class="btn ghost" href="#portfolio">Maker portfolio</a>
+            <a class="btn ghost" href="mailto:shivank.bhatia09@gmail.com">Email me</a>
+          </div>
         </div>
+        <div class="photo"><img src="media/headshot.jpg" width="454" height="303" alt="Shivank Bhatia"></div>
+      </div>
+      <div class="facts">
+        <a class="fact reveal" href="#patents"><b>1</b><span>granted design patent, Government of India</span></a>
+        <a class="fact reveal" href="#patents"><b>IEEE</b><span>full paper presented at EMBC 2026, Toronto</span></a>
+        <a class="fact reveal" href="#circadiancare"><b><span class="count" data-to="200">200</span>+</b><span>participants in the SleepWatch pilot</span></a>
+        <a class="fact reveal" href="#outreach"><b><span class="count" data-to="150">150</span></b><span>shift workers reached through workshops</span></a>
+      </div>
+    </div>
 
+    <div class="explore">
+      <div class="explore-head">
+        <div>
+          <h2>Have a look around</h2>
+        </div>
         <button class="egg sleeper" type="button" aria-label="Someone is asleep in the goal. Click to wake them up.">
           <span class="bubble" aria-live="polite"></span>
           <svg viewBox="0 0 160 90" aria-hidden="true">
@@ -749,31 +889,70 @@
           </svg>
         </button>
       </div>
+      <ul class="tiles">
+        <li><a class="tile reveal" href="#circadiancare">
+          <div class="art"><span class="badge">Founder</span><img src="media/circadiancare.jpg" alt="The CircadianCare wrist-worn prototype"></div>
+          <div class="txt"><span class="when">2025 – PRESENT</span><h3>CircadianCare</h3><p>Founder. A patented wearable that measures how shift work disrupts sleep.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#cradleloop">
+          <div class="art"><span class="badge">Latest · Playable</span><img src="media/cradleloop-top.jpg" alt="The CradleLoop rocking bed prototype"></div>
+          <div class="txt"><span class="when">2026 · LATEST</span><h3>CradleLoop</h3><p>A bed that rocks to your sleep stage. IRIS 2026 National Science Fair. Try a mini version in your browser.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#ifmedtech">
+          <div class="art"><img src="media/pauze-prototype.jpg" alt="The Pauze prototype"></div>
+          <div class="txt"><span class="when">JULY 2025 – PRESENT</span><h3>IF MedTech internship</h3><p>Engineering intern. Pauze and Safetrion, from CAD to prototype.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#robotics">
+          <div class="art"><img src="media/ftc-chassis-cad.jpg" alt="CAD of the FTC robot chassis"></div>
+          <div class="txt"><span class="when">FTC · FRC</span><h3>Robotics</h3><p>Construction sub-team captain. FTC Asia Pacific Open champions.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#outreach">
+          <div class="art"><svg viewBox="0 0 60 60"><path class="t" d="M44 10 A10 10 0 1 0 52 22 A8 8 0 0 1 44 10 Z" /><circle class="s" cx="16" cy="30" r="5" /><circle class="s" cx="30" cy="27" r="5.5" /><path class="s" d="M7 52 Q7 39 16 39 Q25 39 25 52 M19 52 Q19 36 30 36 Q41 36 41 52" /><path class="s" d="M4 52 H50" /></svg></div>
+          <div class="txt"><span class="when">OUTREACH</span><h3>Shift Work Aur Sehat</h3><p>150 shift workers reached. Rolled out across 5 Thane police stations.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#patents">
+          <div class="art"><span class="badge">IEEE EMBC 2026</span><svg viewBox="0 0 60 60"><path class="s" d="M14 6 H38 L46 14 V54 H14 Z M38 6 V14 H46" /><path class="s" d="M20 22 H40 M20 29 H40 M20 36 H31" /><circle class="t" cx="38" cy="43" r="6" /><path class="t" d="M35 48 L33 56 L38 53 L43 56 L41 48" /></svg></div>
+          <div class="txt"><span class="when">PATENTS · PAPERS</span><h3>Patents and papers</h3><p>1 granted design patent, 1 provisional patent, a full paper at IEEE EMBC 2026.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#education">
+          <div class="art"><svg viewBox="0 0 60 60"><path class="s" d="M4 22 L30 10 L56 22 L30 34 Z" /><path class="s" d="M14 27 V40 Q30 50 46 40 V27" /><path class="t" d="M56 22 V36" /><circle class="f" cx="56" cy="38" r="2" /></svg></div>
+          <div class="txt"><span class="when">IB DIPLOMA · DAIS</span><h3>Education</h3><p>Physics HL, Economics HL, Maths AA HL. Plus CS50x and Stanford multivariable calculus.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#testing">
+          <div class="art"><svg viewBox="0 0 60 60"><rect class="s" x="12" y="8" width="36" height="46" rx="4" /><path class="s" d="M22 8 V4 H38 V8" /><path class="t" d="M19 22 L22 25 L27 19 M19 34 L22 37 L27 31 M19 46 L22 49 L27 43" /><path class="s" d="M31 22 H41 M31 34 H41 M31 46 H41" /></svg></div>
+          <div class="txt"><span class="when">SAT · TOEFL</span><h3>Testing</h3><p>SAT 1550 (Math 800). TOEFL 115.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#research">
+          <div class="art"><svg viewBox="0 0 60 60"><path class="s" d="M24 6 V22 L10 48 Q8 54 14 54 H46 Q52 54 50 48 L36 22 V6 M20 6 H40" /><path class="t" d="M15 40 Q22 36 30 40 T45 40" /><circle class="f" cx="26" cy="46" r="1.8" /><circle class="f" cx="34" cy="48" r="1.4" /></svg></div>
+          <div class="txt"><span class="when">RESEARCH</span><h3>Research</h3><p>CircadianCare, CradleLoop, IF MedTech, Johns Hopkins and SleepWatch, at a glance.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#honours">
+          <div class="art"><svg viewBox="0 0 60 60"><path class="s" d="M20 6 L28 24 M40 6 L32 24" /><circle class="s" cx="30" cy="36" r="14" /><path class="t" d="M30 28 L32.4 33 L38 33.6 L33.8 37.3 L35 42.8 L30 40 L25 42.8 L26.2 37.3 L22 33.6 L27.6 33 Z" /></svg></div>
+          <div class="txt"><span class="when">HONOURS</span><h3>Honours</h3><p>CREST Gold, Blue Ocean Top 2.2%, AIME qualifier, Sir Isaac Newton Exam 68th worldwide.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#leadership">
+          <div class="art"><svg viewBox="0 0 60 60"><circle class="s" cx="30" cy="30" r="20" /><path class="t" d="M30 21 L38.6 27.2 L35.3 37.3 H24.7 L21.4 27.2 Z" /><path class="s" d="M30 21 V10.5 M38.6 27.2 L48 24 M35.3 37.3 L41 46 M24.7 37.3 L19 46 M21.4 27.2 L12 24" /><path class="s" d="M14 4 L18 10 L22 4" /></svg></div>
+          <div class="txt"><span class="when">LEADERSHIP</span><h3>Leadership and football</h3><p>Varsity football captain, House Captain, Deputy Secretary General of DAIMUN.</p><span class="go">Take a look →</span></div>
+        </a></li>
+        <li><a class="tile reveal" href="#skills">
+          <div class="art"><svg viewBox="0 0 60 60"><rect class="s" x="6" y="12" width="48" height="32" rx="3" /><path class="s" d="M22 52 H38 M30 44 V52" /><path class="t" d="M20 22 L13 28 L20 34 M40 22 L47 28 L40 34 M33 20 L27 36" /></svg></div>
+          <div class="txt"><span class="when">SKILLS</span><h3>Skills</h3><p>Python, C, JavaScript. ESP32 wearables and sensors. SolidWorks and Fusion 360.</p><span class="go">Take a look →</span></div>
+        </a></li>
+      </ul>
+    </div>
+  </section>
 
-      <p class="mission"><em>I love sleep.</em></p>
+  <main class="wrap">
 
-      <div class="facts">
-        <a class="fact reveal" href="#patents"><b>1</b><span>granted design patent, Government of India</span></a>
-        <a class="fact reveal" href="#patents"><b>IEEE</b><span>full paper presented at EMBC 2026, Toronto</span></a>
-        <a class="fact reveal" href="#circadiancare"><b><span class="count" data-to="200">200</span>+</b><span>participants in the SleepWatch pilot</span></a>
-        <a class="fact reveal" href="#outreach"><b><span class="count" data-to="150">150</span></b><span>shift workers reached through workshops</span></a>
-      </div>
-    </section>
 
     <!-- ===================== RESUME ===================== -->
     <section class="block cv" id="resume" data-min="90">
       <h2 class="label"><span class="time">23:30</span>Resume</h2>
 
-      <div class="tabs reveal">
-        <div class="tablist" role="tablist" aria-label="Resume sections">
-          <button role="tab" aria-selected="true" aria-controls="t-edu" id="tb-edu">Education</button>
-          <button role="tab" aria-selected="false" aria-controls="t-res" id="tb-res" tabindex="-1">Research</button>
-          <button role="tab" aria-selected="false" aria-controls="t-hon" id="tb-hon" tabindex="-1">Honors</button>
-          <button role="tab" aria-selected="false" aria-controls="t-lead" id="tb-lead" tabindex="-1">Leadership</button>
-          <button role="tab" aria-selected="false" aria-controls="t-skill" id="tb-skill" tabindex="-1">Skills</button>
-        </div>
+      <div class="cv-parts">
 
-        <div class="tabpanel" role="tabpanel" id="t-edu" aria-labelledby="tb-edu">
+        <div class="cv-part" id="education">
+          <h3 class="cv-h">Education</h3>
           <div class="cv-row">
             <span class="when">2025 – present</span>
             <div>
@@ -791,7 +970,8 @@
           </div>
         </div>
 
-        <div class="tabpanel" role="tabpanel" id="t-res" aria-labelledby="tb-res" hidden>
+        <div class="cv-part" id="research">
+          <h3 class="cv-h">Research</h3>
           <div class="cv-row">
             <span class="when">2025 – present</span>
             <div><div class="what">CircadianCare · Founder and Lead Researcher <a href="#circadiancare">see below ↓</a></div><p>Multisensor wearable for circadian disruption in shift workers. Design patent granted; provisional patent filed; full paper at IEEE EMBC 2026.</p></div>
@@ -814,7 +994,8 @@
           </div>
         </div>
 
-        <div class="tabpanel" role="tabpanel" id="t-hon" aria-labelledby="tb-hon" hidden>
+        <div class="cv-part" id="honours">
+          <h3 class="cv-h">Honours</h3>
           <ul class="cv-list">
             <li><strong>CREST Gold Award</strong>: the UK’s CREST Gold Award, given for a sustained, independent STEM research project</li>
             <li><strong>Blue Ocean 2026</strong>: Top 2.2% Finalist in Blue Ocean, an entrepreneurship competition that judged CircadianCare’s business model, not just the device itself</li>
@@ -828,7 +1009,8 @@
           </ul>
         </div>
 
-        <div class="tabpanel" role="tabpanel" id="t-lead" aria-labelledby="tb-lead" hidden>
+        <div class="cv-part" id="leadership">
+          <h3 class="cv-h">Leadership</h3>
           <ul class="cv-list">
             <li><strong>Captain, Varsity Football Team, DAIS</strong>: led training, match preparation and team strategy; ISSO Nationals gold medal (2022); competed in the WIFA State League with Mumbai Soccer Prodigies; selected Athlete of the Year at DAIS.</li>
             <li><strong>House Captain, Lion House, DAIS</strong>: led over 200 students, after earlier serving as Vice Captain.</li>
@@ -837,7 +1019,8 @@
           </ul>
         </div>
 
-        <div class="tabpanel" role="tabpanel" id="t-skill" aria-labelledby="tb-skill" hidden>
+        <div class="cv-part" id="skills">
+          <h3 class="cv-h">Skills</h3>
           <ul class="cv-list">
             <li><strong>Programming</strong>: Python, C, SQL, HTML, CSS, JavaScript</li>
             <li><strong>Hardware</strong>: ESP32-based wearables, PPG and SpO2 sensing, GSR, IMU, ambient light sensing, 3D printing, soldering, sensor integration</li>
@@ -1008,6 +1191,60 @@
               <img src="media/cradleloop-deck.jpg" width="644" height="581" loading="lazy" alt="Annotated view of the CradleLoop deck with foam removed, loaded with 10 kg of test weights, beside the air tank and compressor.">
             </div>
             <p class="figs-caption">The tabletop bed, finished and upholstered, and the underlying pneumatic deck loaded with 10 kg of test mass.</p>
+
+            <p class="try-lede" id="try"><strong>Try it.</strong> Move the sliders to change what the wearable senses. Every 30 seconds the bed classifies sleep with plain if-then rules and rocks to match: hard when sleep is fragile, barely at all when it's deep.</p>
+            <div class="demo reveal" aria-label="Interactive CradleLoop demo">
+              <div class="demo-top">
+                <svg class="bed" viewBox="0 0 240 112" aria-hidden="true">
+                  <path class="ground" d="M10 104 H230" />
+                  <path class="frame" d="M120 76 L104 104 M120 76 L136 104" />
+                  <rect class="cyl" x="55" y="88" width="10" height="16" rx="1.5" />
+                  <line class="rod" x1="60" y1="88" x2="60" y2="75" />
+                  <g class="deck">
+                    <rect class="deckline" x="36" y="68" width="168" height="7" rx="2" />
+                    <path class="mattress" d="M38 68 V61 Q38 57 42 57 H198 Q202 57 202 61 V68" />
+                    <rect class="pillowd" x="44" y="49" width="22" height="9" rx="4.5" />
+                    <circle class="headd" cx="60" cy="46" r="8" />
+                    <path class="eye-shut" d="M55.5 46.5 Q57.5 48.5 59.5 46.5" />
+                    <circle class="eye-open" cx="57.5" cy="46" r="1.2" />
+                    <path class="blanketd" d="M70 58 Q74 44 96 45 Q140 44 160 47 Q180 49 190 58" />
+                  </g>
+                  <circle class="pivot" cx="120" cy="76" r="3" />
+                  <g class="dz"><text x="74" y="34">z</text><text x="82" y="26">z</text><text x="91" y="17">z</text></g>
+                </svg>
+                <div class="readout" aria-live="polite">
+                  <span class="label">Sleep state</span>
+                  <b class="state">Light sleep</b>
+                  <span class="label">Rocking</span>
+                  <div class="ampbar"><i></i></div>
+                  <span class="ampnum">45%</span>
+                </div>
+              </div>
+
+              <div class="sliders">
+                <label><span>Movement</span><input type="range" min="0" max="100" value="20" data-k="mv"><output>0.20</output></label>
+                <label><span>Heart rate stability</span><input type="range" min="0" max="100" value="55" data-k="hrs"><output>0.55</output></label>
+                <label><span>Skin conductance</span><input type="range" min="0" max="100" value="40" data-k="gsr"><output>0.40</output></label>
+              </div>
+
+              <ol class="rules" aria-label="Classification rules">
+                <li data-s="0"><code>if movement &gt; 0.6</code><span>→ awake · rock 60%</span></li>
+                <li data-s="1"><code>elif hr_stability &lt; 0.4 or skin &gt; 0.6</code><span>→ fragile · rock 100%</span></li>
+                <li data-s="2"><code>elif hr_stability &gt; 0.7 and skin &lt; 0.3</code><span>→ deep · rock 15%</span></li>
+                <li data-s="3"><code>else</code><span>→ light · rock 45%</span></li>
+              </ol>
+
+              <svg class="trace" aria-hidden="true" preserveAspectRatio="none">
+                <g class="bands"></g>
+                <polyline class="tr mv" /><polyline class="tr hrs" /><polyline class="tr gsr" />
+              </svg>
+              <div class="legend"><span class="k mv">movement</span><span class="k hrs">hr stability</span><span class="k gsr">skin</span><span class="saved"></span></div>
+
+              <div class="demo-foot">
+                <button class="play" type="button">▶ Play a night</button>
+                <span class="note">A simplified illustration. These thresholds are made up for the demo; the real model's come from the study data.</span>
+              </div>
+            </div>
           </div>
         </li>
       </ol>
@@ -1039,64 +1276,6 @@
       </div>
     </section>
 
-    <!-- ===================== DEMO: a toy CradleLoop ===================== -->
-    <section class="block demo-wrap" id="try">
-      <h2 class="label"><span class="time">06:45</span>Try the bed</h2>
-      <p class="lede"><strong>CradleLoop, in your browser.</strong> Move the sliders to change what the wearable senses. Every 30 seconds the bed classifies your sleep with plain if-then rules and rocks to match: hard when sleep is fragile, barely at all when it's deep.</p>
-
-      <div class="demo reveal" aria-label="Interactive CradleLoop demo">
-        <div class="demo-top">
-          <svg class="bed" viewBox="0 0 240 112" aria-hidden="true">
-            <path class="ground" d="M10 104 H230" />
-            <path class="frame" d="M120 76 L104 104 M120 76 L136 104" />
-            <rect class="cyl" x="55" y="88" width="10" height="16" rx="1.5" />
-            <line class="rod" x1="60" y1="88" x2="60" y2="75" />
-            <g class="deck">
-              <rect class="deckline" x="36" y="68" width="168" height="7" rx="2" />
-              <path class="mattress" d="M38 68 V61 Q38 57 42 57 H198 Q202 57 202 61 V68" />
-              <rect class="pillowd" x="44" y="49" width="22" height="9" rx="4.5" />
-              <circle class="headd" cx="60" cy="46" r="8" />
-              <path class="eye-shut" d="M55.5 46.5 Q57.5 48.5 59.5 46.5" />
-              <circle class="eye-open" cx="57.5" cy="46" r="1.2" />
-              <path class="blanketd" d="M70 58 Q74 44 96 45 Q140 44 160 47 Q180 49 190 58" />
-            </g>
-            <circle class="pivot" cx="120" cy="76" r="3" />
-            <g class="dz"><text x="74" y="34">z</text><text x="82" y="26">z</text><text x="91" y="17">z</text></g>
-          </svg>
-          <div class="readout" aria-live="polite">
-            <span class="label">Sleep state</span>
-            <b class="state">Light sleep</b>
-            <span class="label">Rocking</span>
-            <div class="ampbar"><i></i></div>
-            <span class="ampnum">45%</span>
-          </div>
-        </div>
-
-        <div class="sliders">
-          <label><span>Movement</span><input type="range" min="0" max="100" value="20" data-k="mv"><output>0.20</output></label>
-          <label><span>Heart rate stability</span><input type="range" min="0" max="100" value="55" data-k="hrs"><output>0.55</output></label>
-          <label><span>Skin conductance</span><input type="range" min="0" max="100" value="40" data-k="gsr"><output>0.40</output></label>
-        </div>
-
-        <ol class="rules" aria-label="Classification rules">
-          <li data-s="0"><code>if movement &gt; 0.6</code><span>→ awake · rock 60%</span></li>
-          <li data-s="1"><code>elif hr_stability &lt; 0.4 or skin &gt; 0.6</code><span>→ fragile · rock 100%</span></li>
-          <li data-s="2"><code>elif hr_stability &gt; 0.7 and skin &lt; 0.3</code><span>→ deep · rock 15%</span></li>
-          <li data-s="3"><code>else</code><span>→ light · rock 45%</span></li>
-        </ol>
-
-        <svg class="trace" aria-hidden="true" preserveAspectRatio="none">
-          <g class="bands"></g>
-          <polyline class="tr mv" /><polyline class="tr hrs" /><polyline class="tr gsr" />
-        </svg>
-        <div class="legend"><span class="k mv">movement</span><span class="k hrs">hr stability</span><span class="k gsr">skin</span><span class="saved"></span></div>
-
-        <div class="demo-foot">
-          <button class="play" type="button">▶ Play a night</button>
-          <span class="note">A simplified illustration. These thresholds are made up for the demo; the real model's come from the study data.</span>
-        </div>
-      </div>
-    </section>
 
   </main>
 
